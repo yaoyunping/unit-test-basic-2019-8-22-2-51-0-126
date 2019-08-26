@@ -4,23 +4,36 @@ import ExpenseService.Exception.UnexpectedProjectTypeException;
 import ExpenseService.Expense.ExpenseType;
 import ExpenseService.Project.Project;
 import ExpenseService.Project.ProjectType;
+
+import static org.junit.Assert.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
 class ExpenseServiceTest {
-    @Test
+
+
+	@Test
     void should_return_internal_expense_type_if_project_is_internal() throws UnexpectedProjectTypeException {
-        // given
+		// given
+		ProjectType projectType = ProjectType.INTERNAL;
+		
+    	Project project = new Project(projectType,"name");
         // when
-        // then
+    	ExpenseType expenseType = ExpenseService.getExpenseCodeByProjectTypeAndName(project);
+    	// then
+    	assertEquals(ExpenseType.INTERNAL_PROJECT_EXPENSE,expenseType);
     }
 
     @Test
     void should_return_expense_type_A_if_project_is_external_and_name_is_project_A() throws UnexpectedProjectTypeException {
-        // given
+		// given
+    	ProjectType projectType = ProjectType.EXTERNAL;
+    	Project project = new Project(projectType, "name");
         // when
+    	
         // then
     }
 
